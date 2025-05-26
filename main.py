@@ -7,20 +7,8 @@ from openai import OpenAI
 import custom_functions
 from waitress import serve
 
-# Check OpenAI version compatibility
-from packaging import version
-
-required_version = version.parse("1.1.1")
-current_version = version.parse(openai.__version__)
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 AIRTABLE_API_KEY = os.getenv("AIRTABLE_API_KEY")
-
-if current_version < required_version:
-  raise ValueError(
-      f"Error: OpenAI version {openai.__version__} is less than the required version 1.1.1"
-  )
-else:
-  print("OpenAI version is compatible.")
 
 # Create Flask app
 app = Flask(__name__)
