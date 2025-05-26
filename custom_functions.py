@@ -2,7 +2,7 @@ import json
 import requests
 import os
 from openai import OpenAI
-from assistant_insturctions import assistant_instructions
+from assistant_instructions import assistant_instructions
 from dotenv import load_dotenv, dotenv_values
 
 load_dotenv()
@@ -17,7 +17,7 @@ client = OpenAI(
 )
 # Add lead to Airtable
 def create_lead(name="", company_name="", phone="", email=""):
-  url = "https://api.airtable.com/v0/appEH432PCXidCD7Y/Leads"  # Change this to your Airtable API URL
+  url = "https://api.airtable.com/v0/appOrTVQJzXgO4oNg/Leads"
   headers = {
       "Authorization" : 'Bearer ' + AIRTABLE_API_KEY,
       "Content-Type": "application/json"
@@ -60,10 +60,10 @@ def create_assistant(client):
     assistant = client.beta.assistants.create(
         # Getting assistant prompt from "prompts.py" file, edit on left panel if you want to change the prompt
         instructions=assistant_instructions,
-        model="gpt-4-turbo-preview",
+        model="gpt-4o",
         tools=[
             {
-                "type": "retrieval"  # This adds the knowledge base as a tool
+                "type": "file_search"  # This adds the knowledge base as a tool
             },
             {
                 "type": "function",  # This adds the lead capture as a tool
@@ -96,7 +96,27 @@ def create_assistant(client):
                 }
             }
         ],
-        file_ids=[file.id])
+        tool_resources={
+            "file_search": {
+                "vector_store_ids": []
+            }
+        })
+
+    # Create a vector store and add the file to it
+    vector_store = client.vector_stores.create(
+        name="Knowledge Base",
+        file_ids=[file.id]
+    )
+
+    # Update the assistant to use the vector store
+    assistant = client.beta.assistants.update(
+        assistant_id=assistant.id,
+        tool_resources={
+            "file_search": {
+                "vector_store_ids": [vector_store.id]
+            }
+        }
+    )
 
     # Create a new assistant.json file to load on future runs
     with open(assistant_file_path, 'w') as file:
