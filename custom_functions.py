@@ -17,7 +17,7 @@ client = OpenAI(
 )
 # Add lead to Airtable
 def create_lead(name="", company_name="", phone="", email=""):
-  url = "https://api.airtable.com/v0/appOrTVQJzXgO4oNg/Leads"
+  url = "https://api.airtable.com/v0/appSQ5O9W3Adxphqa/Leads"
   headers = {
       "Authorization" : 'Bearer ' + AIRTABLE_API_KEY,
       "Content-Type": "application/json"
@@ -88,7 +88,7 @@ def create_assistant(client):
                             },
                             "company_name": {
                                 "type": "string",
-                                "description": "CompanyName of the lead."
+                                 "description": "CompanyName of the lead."
                             }
                         },
                         "required": ["name", "email", "company_name"]
