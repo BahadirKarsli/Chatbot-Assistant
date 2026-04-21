@@ -40,7 +40,7 @@ AIRTABLE_API_KEY=your_airtable_api_key_here
 ## 🚀 Installation & Deployment
 Follow the steps below to deploy the application on a Linux server:
 
-1. Connect to your server via SSH:
+1- Connect to your server via SSH:
 
 ```
 ssh root@YOUR_SERVER_IP
