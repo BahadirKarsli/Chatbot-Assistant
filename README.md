@@ -1,4 +1,4 @@
-readme_content = """<div align="center">
+"""<div align="center">
   <h1>🤖 Chatbot Assistant with Airtable Integration</h1>
   <p>An intelligent chatbot assistant that extracts specific user data (name, email, phone number) and seamlessly saves it to Airtable.</p>
 </div>
