@@ -40,41 +40,41 @@ AIRTABLE_API_KEY=your_airtable_api_key_here
 ## 🚀 Installation & Deployment
 Follow the steps below to deploy the application on a Linux server:
 
-1- Connect to your server via SSH:
+### 1.. Connect to your server via SSH:
 
 ```
 ssh root@YOUR_SERVER_IP
 ```
-Clone the repository and navigate into it:
+### 2. Clone the repository and navigate into it:
 
 ```
 git clone [https://github.com/BahadirKarsli/Chatbot-Assistant.git](https://github.com/BahadirKarsli/Chatbot-Assistant.git)
 cd Chatbot-Assistant
 ```
-Install the venv module (if not already installed):
+### 3. Install the venv module (if not already installed):
 
 ```
 sudo apt update
 sudo apt install python3-venv
 ```
-Create and activate a virtual environment:
+### 4. Create and activate a virtual environment:
 
 ```
 python3 -m venv .venv
 source .venv/bin/activate
 ```
-Install the required dependencies:
+### 5. Install the required dependencies:
 
 ```
 pip3 install -r requirements.txt
 ```
-Configure the environment variables:
+### 6. Configure the environment variables:
 
 ```
 nano .env
 # Add your OPENAI_API_KEY and AIRTABLE_API_KEY, then save and exit.
 ```
-Run the server in the background:
+### 7. Run the server in the background:
 
 ```
 nohup python3 main.py &
